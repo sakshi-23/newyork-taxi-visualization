@@ -1,0 +1,135 @@
+<html>
+<link rel='stylesheet' type='text/css' href={{ url_for('static', filename='lib/slider.css') }}></link>
+<style>
+html, body {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  background-color: #222;
+  color: #fff;
+  font-family: 'Helvetica Neue';
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 1px;
+  overflow: hidden;
+}
+.Map, .Heatmap {
+  margin: 20px 0 20px 20px;
+  float: left;
+  width: 350px;
+  height: 2000px;
+  position: relative;
+}
+.Graph {
+  margin: 20px 0 20px 20px;
+  position: absolute;
+  right: 0;
+}
+.title, .graphX, .graphY {
+  color: #948787;
+}
+.graphX {
+  position: absolute;
+  bottom: 0;
+  left: 230px;
+}
+.graphY {
+  position: absolute;
+  top: 300px;
+  left: 0;
+}
+.chart {
+  width: 600px;
+  height: 1000px;
+}
+.chartLabel, .chartNumber {
+  fill: #948787;
+  font-size: 8px;
+  text-anchor: middle;
+}
+.chartNumber {
+  fill: #222;
+}
+#hours {
+  border: none;
+  background-color: #000;
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  right: 40px;
+}
+#tooltip {
+  position: fixed;
+  color: #fff;
+  background-color: #333;
+  padding: 10px;
+  margin: -30px;
+  visibility: hidden;
+}
+.demand:hover, .source:hover {
+  stroke-width: 3;
+}
+.refLine {
+  stroke: #948787;
+  stroke-dasharray: '20, 20';
+}
+</style>
+<!-- include dependencies from lib -->
+<script src={{ url_for('static', filename='lib/d3.js') }}></script>
+<script src={{ url_for('static', filename='lib/queue.js') }}></script>
+<script src={{ url_for('static', filename='lib/jquery.js') }}></script>
+<script src={{ url_for('static', filename='lib/react.js') }}></script>
+<script src={{ url_for('static', filename='lib/jsx.js') }}></script>
+<script src={{ url_for('static', filename='lib/slider.js') }}></script>
+<!-- include react components -->
+<script type='text/jsx' src={{ url_for('static', filename='src/components/Interface.jsx') }}></script>
+<script type='text/jsx' src={{ url_for('static', filename='src/components/Map.jsx') }}></script>
+<script type='text/jsx' src={{ url_for('static', filename='src/components/Heatmap.jsx') }}></script>
+<script type='text/jsx' src={{ url_for('static', filename='src/components/Graph.jsx') }}></script>
+<body>
+</body>
+<!-- initialize root interface -->
+<script type='text/jsx'>
+
+var mapWidth = 350
+var mapHeight = 600
+var graphWidth = 500
+var graphHeight = 600
+var color = d3.scale.category20c()
+
+var categories = ["food", "sights", "arts", "specials", "best", "parks", "shops", "drinks"]
+var years = ["", "2012", "", "2013", "", "2014", "", ""]
+
+var yscale = d3.scale.linear()
+  .domain([0, 1000000])
+  .range([300, 0])
+var line = d3.svg.line()
+  .x(function(d,i){ return i * 50 })
+  .y(function(d,i){ return yscale(d) })
+
+function requestData(url, callback) {
+  var req = new XMLHttpRequest
+  req.open("GET", url, true)
+  req.setRequestHeader("Accept", "application/json")
+  req.onreadystatechange = function() {
+    if (req.readyState === 4) {
+      if (req.status < 300) callback(null, JSON.parse(req.responseText))
+      else callback(req.status)
+    }
+  }
+  req.send(null)
+}
+
+function linkArc(d) {
+  var dx = d.target.x - d.source.x,
+      dy = d.target.y - d.source.y,
+      dr = Math.sqrt(dx * dx + dy * dy);
+  return "M" + d.source.x + "," + d.source.y + "A" + dr + "," + dr + " 0 0,1 " + d.target.x + "," + d.target.y;
+}
+
+React.render(<Interface />, document.body)
+
+</script>
+</html>
