@@ -1,16 +1,19 @@
 # 6242 Project: New York City Taxis Study
 
 Introduction
-● Taxis are valuable sensors and information associated with taxi trips can provide unprecedented
+1. Taxis are valuable sensors and information associated with taxi trips can provide unprecedented
 insight
-● Ridesourcing’s usage and impacts are not well understood
-● Impact of customers and locations served on overall vehicle travel is not well studied
-Our Goal:
+2. Ridesourcing’s usage and impacts are not well understood
+3. Impact of customers and locations served on overall vehicle travel is not well studied
+
+### Our Goal:
 Visualize the relationship between New York City taxi routes
 and New York City infrastructure
 
 Dataset source [here](http://www.nyc.gov/html/tlc/html/about/trip_record_data.shtml)
 
+![Alt text](/6242%20poster.jpg?raw=true "Poster presentation")
+![Alt text](/6242%20demo.png?raw=true "Demo")
 
 
 Dependencies (install with pip)
