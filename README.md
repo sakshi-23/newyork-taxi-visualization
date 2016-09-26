@@ -12,11 +12,11 @@ and New York City infrastructure
 
 Dataset source [here](http://www.nyc.gov/html/tlc/html/about/trip_record_data.shtml)
 
-![Alt text](/6242%20poster.jpg?raw=true "Poster presentation")
-![Alt text](/6242%20demo.png?raw=true "Demo")
-
-
 Dependencies (install with pip)
 * flask 0.10.1
 * werkzeug 0.10.4
 * simplejson 3.3.1
+
+![Alt text](/6242%20poster.jpg?raw=true "Poster presentation")
+
+
